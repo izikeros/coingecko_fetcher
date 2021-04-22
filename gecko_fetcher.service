@@ -1,0 +1,9 @@
+[Unit]
+Description=Service for periodical (6min) fetching data from the coingecko
+After=multi-user.target
+[Service]
+Type=simple
+Restart=always
+ExecStart=/usr/bin/python3 /home/safjan/bin/gecko_fetcher.py
+[Install]
+WantedBy=multi-user.target
