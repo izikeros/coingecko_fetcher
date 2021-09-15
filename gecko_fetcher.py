@@ -19,14 +19,14 @@ UPDATE_FREQUENCY_MINUTES = 5
 
 
 def get_coingecko_front_page(
-        n=200,
-        p_max=6,
-        spark="true",
-        change="1h,7d,14d,30d",  # "1h,24h,7d,14d,30d,200d,1y" # NOTE: 24h is by default,
-        base_url=BASE_URL,
-        endpoint=ENDPOINT,
-        currency=CURRENCY,
-        order=ORDER
+    n=200,
+    p_max=6,
+    spark="true",
+    change="1h,7d,14d,30d",  # "1h,24h,7d,14d,30d,200d,1y" # NOTE: 24h is by default,
+    base_url=BASE_URL,
+    endpoint=ENDPOINT,
+    currency=CURRENCY,
+    order=ORDER,
 ):
     all_responses = []
     for p in range(1, p_max + 1):
