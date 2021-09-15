@@ -1,4 +1,6 @@
 # Gecko Fetcher
+![CI](https://github.com/izikeros/coingecko_fetcher/actions/workflows/ci.yml/badge.svg)
+
 Service for periodical fetching data from the [CoinGecko.com](https://www.coingecko.com/) and saving it in json file.
 
 CoinGecko is a website and mobile app used to aggregate information regarding the performance of the majority of all cryptocurrencies available.
