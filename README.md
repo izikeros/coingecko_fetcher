@@ -67,6 +67,17 @@ sudo systemctl status gecko_fetcher.service
 
 
 
+### service start order
+
+In case of problems with failing to start the service, one can delay start with: 
+
+```
+[Service]
+ExecStartPre=/bin/sleep 30
+```
+or put it later in the order in services, e.g. make it dependent on `getty_target.service` or `Type=idle`.
+
+
 ## Credits
 
 Thanks to [WasiUllah Khan](https://wasiullah-khan21.medium.com/) for the article [Setup a python script as a service through systemctl/systemd](https://medium.com/codex/setup-a-python-script-as-a-service-through-systemctl-systemd-f0cc55a42267) which was great instruction how to create service. Parts of the article were adopted and included to this README.
