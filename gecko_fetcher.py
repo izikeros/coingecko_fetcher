@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
 import json
+import logging
 import os
 import time
 from pathlib import Path
 
 import requests
 
-import logging
-
 log = logging.getLogger(__name__)
 log_level = os.environ.get("LOGLEVEL", "INFO")
 
-level_format = '%(levelname)s:%(message)s'
+level_format = "%(levelname)s:%(message)s"
 
 logging.basicConfig(format=level_format, level=log_level)
 
@@ -75,7 +74,7 @@ if __name__ == "__main__":
         t = time.process_time()
         responses = get_coingecko_front_page()
         elapsed_time = time.process_time() - t
-        log.info(f"{len(responses)} items fetched in {elapsed_time}")
+        log.info(f"{len(responses)} items fetched in {elapsed_time:.1f} s")
         save_responses(responses)
         log.info("Responses saved, waiting for next update")
         time.sleep(UPDATE_FREQUENCY_MINUTES * 60)
