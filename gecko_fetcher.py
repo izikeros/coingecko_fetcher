@@ -104,12 +104,12 @@ def save_responses(responses):
 
 
 if __name__ == "__main__":
-    log.info("Fetcher initiated")
-    while True:
-        t = time.process_time()
-        responses = get_coingecko_front_page()
-        elapsed_time = time.process_time() - t
-        log.info(f"{len(responses)} items fetched in {elapsed_time:.1f} s")
-        save_responses(responses)
-        log.info("Responses saved, waiting for next update")
-        time.sleep(UPDATE_FREQUENCY_MINUTES * 60)
+    log.info("Fetcher  - initiated")
+    t = time.process_time()
+    cg_responses = get_coingecko_front_page()
+    elapsed_time = time.process_time() - t
+    log.info(
+        "Fetcher - {} items fetched in {:.1f} s".format(len(cg_responses), elapsed_time)
+    )
+    save_responses(cg_responses)
+    log.info("Fetcher - Responses saved to: {}, exiting".format(data_full_file))
