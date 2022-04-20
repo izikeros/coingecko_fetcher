@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import argparse
 import json
 import logging
 import os
@@ -16,6 +17,7 @@ log_level = os.environ.get("LOGLEVEL", "INFO")
 level_format = "%(levelname)s:%(message)s"
 logging.basicConfig(format=level_format, level=log_level)
 
+UPDATE_FREQUENCY_MINUTES = 5
 
 # Try to read config file
 config_dir = Path.home() / ".config" / "gecko_fetcher"
@@ -148,11 +150,36 @@ def save_responses(responses):
     log.info(f"Fetcher - Responses saved to: {data_full_file}, exiting")
 
 
-if __name__ == "__main__":
+def run_once():
     log.info("Fetcher  - initiated")
-    # t = time.process_time()
     t = time.time()
     cg_responses = get_coingecko_front_page()
     elapsed_time = time.time() - t
     log.info(f"Fetcher - {len(cg_responses)} items fetched in {elapsed_time:.1f} s")
     save_responses(cg_responses)
+
+
+def run_forever():
+    while True:
+        while True:
+            run_once()
+            time.sleep(UPDATE_FREQUENCY_MINUTES * 60)
+
+
+# TODO: KS: 2022-04-20: use argparse to parse command line arguments and enable running periodically
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Fetch data from CoinGecko")
+
+    parser.add_argument(
+        "-p",
+        "--periodically",
+        action="store_true",
+        default=False,
+        help="run fetching periodically",
+    )
+    args = parser.parse_args()
+
+    if args.periodically:
+        run_forever()
+    else:
+        run_once()
