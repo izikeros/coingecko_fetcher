@@ -29,7 +29,7 @@ Provide proper path to the file where data will be saved. You need to edit `geck
 DATA_FILE = "/home/safjan/data/coingecko_data.json"
 ```
 
-### install service
+### install service on Linux with systemd
 
 Edit `gecko_fether.service` and provide proper path to the script and the python executable.
 
@@ -60,14 +60,12 @@ sudo systemctl stop gecko_fetcher.service
 ```
 To restart.
 ```sh
-sudo systemctl restart ngecko_fetcher.service
+sudo systemctl restart gecko_fetcher.service
 ```
 To check status.
 ```sh
 sudo systemctl status gecko_fetcher.service
 ```
-
-
 
 ### service start order
 
@@ -79,6 +77,8 @@ ExecStartPre=/bin/sleep 30
 ```
 or put it later in the order in services, e.g. make it dependent on `getty_target.service` or `Type=idle`.
 
+### install service on macos
+TBD
 
 ## Credits
 
