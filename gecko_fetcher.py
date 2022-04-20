@@ -30,7 +30,7 @@ spark = "true"
 percentage_price_change_periods = "1h,7d,14d,30d"
 
 if os.path.isfile(str(config_dir)):
-    with open(str(config_file), "r") as f:
+    with open(str(config_file)) as f:
         config = json.load(f)
     if "data_dir" in config:
         data_dir = Path(config["data_dir"])
@@ -90,7 +90,7 @@ def get_coingecko_front_page(
             raw_response = requests.get(url)
             response = json.loads(raw_response.content.decode("utf-8"))
         except Exception as e:
-            pass
+            log.error(f"Error: {e}")
         p += 1
         all_responses.extend(response)
         # TODO: KS: 2021-04-22: consider adding sidecar file with information on last update time
@@ -108,8 +108,6 @@ if __name__ == "__main__":
     t = time.process_time()
     cg_responses = get_coingecko_front_page()
     elapsed_time = time.process_time() - t
-    log.info(
-        "Fetcher - {} items fetched in {:.1f} s".format(len(cg_responses), elapsed_time)
-    )
+    log.info(f"Fetcher - {len(cg_responses)} items fetched in {elapsed_time:.1f} s")
     save_responses(cg_responses)
-    log.info("Fetcher - Responses saved to: {}, exiting".format(data_full_file))
+    log.info(f"Fetcher - Responses saved to: {data_full_file}, exiting")

@@ -4,7 +4,8 @@ import logging
 import os
 import time
 
-from gecko_fetcher import get_coingecko_front_page, save_responses
+from gecko_fetcher import get_coingecko_front_page
+from gecko_fetcher import save_responses
 
 log = logging.getLogger(__name__)
 log_level = os.environ.get("LOGLEVEL", "INFO")
