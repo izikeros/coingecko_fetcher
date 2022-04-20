@@ -71,7 +71,7 @@ sudo systemctl status gecko_fetcher.service
 
 ### service start order
 
-In case of problems with failing to start the service, one can delay start with: 
+In case of problems with failing to start the service, one can delay start with:
 
 ```
 [Service]
