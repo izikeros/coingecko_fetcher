@@ -14,7 +14,7 @@ from requests.packages.urllib3.util.retry import Retry
 log = logging.getLogger(__name__)
 log_level = os.environ.get("LOGLEVEL", "INFO")
 
-level_format = "%(levelname)s:%(message)s"
+level_format = "[%(levelname).1s] %(message)s"
 logging.basicConfig(format=level_format, level=log_level)
 
 UPDATE_FREQUENCY_MINUTES = 5
@@ -151,7 +151,7 @@ def save_responses(responses):
 
 
 def run_once():
-    log.info("Fetcher  - initiated")
+    log.info("Fetcher - initiated")
     t = time.time()
     cg_responses = get_coingecko_front_page()
     elapsed_time = time.time() - t
