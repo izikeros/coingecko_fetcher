@@ -167,7 +167,7 @@ def get_coingecko_front_page(
 
 
 def save_responses(responses):
-    with open(data_full_file, "wt") as file_out:
+    with open(data_full_file, "w") as file_out:
         json.dump(responses, file_out)
     log.info(f"Fetcher - Responses saved to: {data_full_file}, exiting")
 
