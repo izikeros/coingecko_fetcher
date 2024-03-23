@@ -1,4 +1,24 @@
 #!/usr/bin/env python3
+"""Fetch data from CoinGecko API and save to file.
+
+Prerequisites:
+- Python 3.6 or later
+- requests library
+
+For troubleshooting, set the environment variable LOGLEVEL to DEBUG.
+$ LOGLEVEL=DEBUG ./gecko_fetcher.py
+
+To run the fetcher periodically, use the -p flag:
+$ ./gecko_fetcher.py -p
+
+To run the fetcher once, use the -o flag:
+$ ./gecko_fetcher.py -o
+
+To run the fetcher once and save the responses to a file, use the -s flag:
+$ ./gecko_fetcher.py -s
+
+"""
+
 import argparse
 import json
 import logging
@@ -8,8 +28,9 @@ from pathlib import Path
 
 import requests
 from requests.adapters import HTTPAdapter
-from requests.packages.urllib3.util.retry import Retry
 
+# from requests.packages.urllib3.util.retry import Retry
+from urllib3.util.retry import Retry
 
 log = logging.getLogger(__name__)
 log_level = os.environ.get("LOGLEVEL", "INFO")
@@ -101,6 +122,7 @@ def get_coingecko_front_page(
     endpoint=ENDPOINT,
     currency=CURRENCY,
     order=ORDER,
+    with_retry=False,
 ):
     all_responses = []
     for p in range(1, p_max + 1):
@@ -116,7 +138,7 @@ def get_coingecko_front_page(
 
         try:
             log.debug(f"Requesting page: {p}")
-            raw_response = http.get(url)
+            raw_response = http.get(url) if with_retry else requests.get(url)
         except requests.ConnectionError as e:
             print(
                 "OOPS!! Connection Error. Make sure you are connected to Internet. Technical Details given below.\n"
