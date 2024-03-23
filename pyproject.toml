@@ -1,0 +1,17 @@
+[project]
+name = "coingecko_fetcher"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "Krystian Safjan", email = "ksafjan@gmail.com"},
+]
+dependencies = [
+    "requests>=2.31.0",
+]
+requires-python = "==3.12.*"
+readme = "README.md"
+license = {text = "MIT"}
+
+
+[tool.pdm]
+distribution = false
